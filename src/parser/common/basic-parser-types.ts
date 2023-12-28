@@ -41,6 +41,10 @@ export enum SyntaxContextType {
     COLUMN = 'column',
     /** column name that will be created */
     COLUMN_CREATE = 'columnCreate',
+    SCHEMA = 'schema',
+    SCHEMA_CREATE = 'schemaCreate',
+    PARTITION = 'partition',
+    Key = 'key',
 }
 
 export interface WordRange {
@@ -78,6 +82,7 @@ export interface Suggestions<T = WordRange> {
      * Suggestions about keywords
      */
     readonly keywords: string[];
+    readonly currentSql?: string;
 }
 
 export interface TextSlice {

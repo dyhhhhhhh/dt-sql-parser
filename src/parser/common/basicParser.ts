@@ -268,6 +268,7 @@ export default abstract class BasicParser<
 
         this.parseWithCache(input);
         let sqlParserIns = this._parser;
+        let currentSql = input;
         const allTokens = this.getAllTokens(input);
         let caretTokenIndex = findCaretTokenIndex(caretPosition, allTokens);
         let c3Context: ParserRuleContext = this._parseTree;
@@ -332,6 +333,7 @@ export default abstract class BasicParser<
              * and c3 will collect candidates in the newly generated parseTree.
              */
             const inputSlice = input.slice(startIndex, stopIndex);
+            currentSql = inputSlice;
 
             const lexer = this.createLexer(inputSlice);
             lexer.removeErrorListeners();
@@ -377,6 +379,7 @@ export default abstract class BasicParser<
             }
         );
         return {
+            currentSql,
             syntax: syntaxSuggestions,
             keywords: originalSuggestions.keywords,
         };
